@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="t-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <div id="calculadora">
+        <div class="exibir">
+            <div id="resultadoFinal">
+
+            </div>
+            <div id="entrada">
+
+            </div>
+        </div>
+
+        <div class="botoes">
+            <div class="primeiraFileira">
+                <button class="botaoExcluir" onclick="apagarDado()"><img src="./img/excluir.png" alt=""></button>
+                <button id="botaoApagarTudo">C</button>
+                <button id="botaoPorcentagem" value="%" onclick="entradaOperacao(this.value)">%</button>
+            </div>
+
+            <div class="segundaFileira">
+                <button id="botaoUm" value="1" onclick="entradaDados(this.value)">1</button>
+                <button id="botaoDois" value="2" onclick="entradaDados(this.value)">2</button>
+                <button id="botaoTres" value="3" onclick="entradaDados(this.value)">3</button>
+                <button id="botaoMultiplicacao" value="x" onclick="entradaOperacao(this.value)">X</button>
+                
+            </div>
+
+            <div class="terceiraFileira">
+                <button id="botaoQuatro" value="4" onclick="entradaDados(this.value)">4</button>
+                <button id="botaoCinco" value="5" onclick="entradaDados(this.value)">5</button>
+                <button id="botaoSeis" value="6" onclick="entradaDados(this.value)">6</button>
+                <button id="botaoMenos" value="-" onclick="entradaOperacao(this.value)">-</button>
+            </div>
+
+            <div class="quartaFileira">
+                <button id="botaoSete" value="7" onclick="entradaDados(this.value)">7</button>
+                <button id="botaoOito" value="8" onclick="entradaDados(this.value)">8</button>
+                <button id="botaoNove" value="9" onclick="entradaDados(this.value)">9</button>
+                <button id="botaoMais" value="+" onclick="entradaOperacao(this.value)">+</button>
+            </div>
+
+            <div class="quintaFileira">
+                <button id="botaoZero" value="0" onclick="entradaDados(this.value)">0</button>
+                <button id="botaoPonto">.</button>
+                <button class="botaoIgual"><img src="./img/igual.png" alt=""></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    
+    // A operação precisa ir para uma váriavel
+    //3. A operação precisa aparecer na tela exibir
+    //4. O segundo número precisa ir para uma váriavel
+    //5. A variavel precisa aparecer na tela exibir
+    //. O resultado precisa aparecer
+    //EXTRA: Se clicar em apagar apaga um numero ou a operação inteira
+
+
+
+    numeros = []
+    segundoValor = []
+    operacao = []
+    posicao = 0
+    resultado = 0
+
+    function entradaDados(valorBotao){
+        numeroSelecionado = Number(valorBotao)
+
+        if (operacao.length == 0){
+            numeros.push(numeroSelecionado)
+
+            lista = Number(numeros.join(""))
+
+            entrada.innerHTML = lista
+        }
+
+        else if(operacao.length == 1){
+            segundoValor.push(numeroSelecionado)
+
+            lista2 = Number(segundoValor.join(""))
+
+            entrada.innerHTML += segundoValor[posicao]
+            posicao +=1
+
+        }
+        
+    }
+
+    function apagarDado(){
+        numeros.pop()
+        
+        lista = Number(numeros.join(""))
+
+        entrada.innerHTML = lista
+    }
+    
+    function entradaOperacao(escolha){
+        entrada.innerHTML += escolha
+
+        operacao.push(escolha)
+
+        if (operacao.length >= 2 ){
+            resultado = lista+lista2
+
+            entrada.innerHTML = resultado + operacao
+
+            lista = resultado
+            posicao = 0
+
+            //Arrumar repetição de operações na tela
+            //Toda vez que uma operação for clicada o resultado tem que aparecer com essa operação. Exemplo entrada.inner == "12x"
+            //Só que ai o usuário vai clicar direto no numero e então vai ir para função entradaDados no if operacao == 0
+            //Porque aqui a operação recebeu 0
+            // e ae a gente trabalha com o primeiroValor da lista 1
+            //Ou seja o problema ta na ista operacao, ou na forma como estruturei os if's da função entradaDados
+
+            operacao = []
+            
+        }
+        else if (operacao.length == 1){
+            segundoValor = []
+        } //Se tiver alguma operacao o numero zera pra poder entrar novos numeros
+
+        
+    }
+
+</script>
